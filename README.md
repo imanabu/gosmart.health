@@ -26,11 +26,16 @@ uv sync --group dev
 
 ### 2. Run database migrations
 
+If the database does not exist, this will create it in the project
+root as `db.sqlite3`
+
 ```bash
 uv run python manage.py migrate --settings=mysite.settings.dev
 ```
 
 ### 3. Create an admin user
+
+**Note** this will prompt the username and paswordd on the terminal.
 
 ```bash
 uv run python manage.py createsuperuser --settings=mysite.settings.dev

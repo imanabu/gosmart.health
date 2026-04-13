@@ -10,8 +10,6 @@ __pycache__/
 # Django
 /db.sqlite3
 /db.bak
-/static/          # collectstatic output (STATIC_ROOT)
-/media/           # user-uploaded files
 
 # Secrets / local overrides
 .env
@@ -21,3 +19,6 @@ mysite/settings/local.py
 .DS_Store
 .idea/
 *.swp
+/media
+/static
+
