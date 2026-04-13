@@ -1,0 +1,31 @@
+/* ─── Wagtail rich text image alignment ─────────────────────────────────── */
+
+.richtext-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.richtext-image.left {
+    float: left;
+    margin: 0.25rem 1.5rem 1rem 0;
+}
+
+.richtext-image.right {
+    float: right;
+    margin: 0.25rem 0 1rem 1.5rem;
+}
+
+.richtext-image.fullwidth {
+    float: none;
+    display: block;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+/* Clear floats after rich text blocks */
+.richtext::after {
+    content: "";
+    display: table;
+    clear: both;
+}

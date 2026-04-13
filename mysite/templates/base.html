@@ -1,0 +1,84 @@
+{% load static wagtailcore_tags wagtailuserbar menu_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        {% block title %}
+            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %} — {{ current_site.site_name }}{% endif %}
+        {% endblock %}
+    </title>
+
+    {% if page.search_description %}
+    <meta name="description" content="{{ page.search_description }}" />
+    {% endif %}
+
+    {# Force all links in the live preview panel to be opened in a new tab #}
+    {% if request.in_preview_panel %}
+    <base target="_blank">
+    {% endif %}
+
+    {# Bootstrap 5 CSS #}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+
+    {# Site CSS #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mysite.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="d-flex flex-column min-vh-100 {% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
+
+    {# ── Navbar ── #}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="/">
+                {% wagtail_site as current_site %}
+                {{ current_site.site_name|default:"gosmart.health" }}
+            </a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                {% main_menu max_levels=2 %}
+            </div>
+        </div>
+    </nav>
+
+    {# ── Page content ── #}
+    <main class="flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    {# ── Footer ── #}
+    <footer class="bg-dark text-secondary py-4 mt-auto">
+        <div class="container text-center small">
+            &copy; {% now "Y" %}
+            {% wagtail_site as current_site %}
+            {{ current_site.site_name|default:"gosmart.health" }}
+        </div>
+    </footer>
+
+    {# Bootstrap 5 JS (bundle includes Popper) #}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmE0dfxZOv2qJmVRhW0G5r3c0k"
+            crossorigin="anonymous"></script>
+
+    {# Site JS #}
+    <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

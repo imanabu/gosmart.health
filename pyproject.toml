@@ -1,0 +1,16 @@
+[project]
+name = "gosmart-health"
+version = "0.1.0"
+description = "gosmart.health — Django/Wagtail CMS site"
+requires-python = ">=3.12"
+dependencies = [
+    "wagtail>=6.4",
+    "Pillow>=11.0",
+    "gunicorn>=23.0",
+    "wagtailmenus>=4.0.6",
+]
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar>=4.4",
+]
